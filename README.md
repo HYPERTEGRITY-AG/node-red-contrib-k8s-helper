@@ -29,5 +29,5 @@ npm install node-red-contrib-k8s-helper
 
 ## Copyright and License
 
-Copyright 2022 Will Freitag<br>
+Copyright (c) 2022 Will Freitag<br>
 Licensed under the [MIT License](./LICENSE).
