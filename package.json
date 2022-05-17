@@ -1,0 +1,24 @@
+{
+  "name": "@hypertegrity/node-red-contrib-k8s-helper",
+  "version": "0.98.0",
+  "description": "Node-RED tools for use in Containerized Environments.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper.git"
+  },
+  "keywords": [
+    "node-red",
+    "kubernetes"
+  ],
+  "author": "Will Freitag",
+  "license": "MIT",
+  "node-red" : {
+    "nodes": {
+      "health": "health.js"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues"
+  },
+  "homepage": "https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper#readme"
+}
