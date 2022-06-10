@@ -1,5 +1,5 @@
 module.exports = function(RED) {
-    function HealthNode(config) {
+    function HealthChecksNode(config) {
         RED.nodes.createNode(this, config);
         var node = this;
 
@@ -15,7 +15,7 @@ module.exports = function(RED) {
             } else {
                 this.status({ fill:"red",
                               shape:"ring",
-                              text:"An instance of Health Check is already exiting!" });
+                              text:"An instance of Health Check is already existing!" });
                 throw "An instance of Health Check is already exiting!";
             }
         } else {
@@ -31,10 +31,10 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("health-checks", HealthNode, {
+    RED.nodes.registerType("health-checks", HealthChecksNode, {
         settings: {
-            healthChecksNodeColour: {
-                value: "red",
+            healthChecksPort: {
+                value: "",
                 exportable: true
             }
         }
