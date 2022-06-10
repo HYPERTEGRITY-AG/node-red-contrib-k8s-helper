@@ -1,7 +1,7 @@
 {
   "name": "@hypertegrity/node-red-contrib-k8s-helper",
-  "version": "0.98.0",
-  "description": "Node-RED tools for use in Containerized Environments.",
+  "version": "0.98.88",
+  "description": "Node-RED tools for use in containerized environments.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper.git"
@@ -14,7 +14,7 @@
   "license": "MIT",
   "node-red" : {
     "nodes": {
-      "health": "health.js"
+      "health-checks": "health-checks.js"
     }
   },
   "bugs": {
