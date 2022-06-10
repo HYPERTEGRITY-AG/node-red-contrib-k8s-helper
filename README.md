@@ -7,7 +7,7 @@ Node-RED tools for use in Containerized Environments
 
 ## Supported custom nodes
 
--   [Health](docs/custom_nodes/health.md)
+-   [health-checks](docs/custom_nodes/health-checks.md)
 
 ## Documentation
 
@@ -18,7 +18,7 @@ Node-RED tools for use in Containerized Environments
 Run the following command on a command-line interface.
 
 ```
-npm install node-red-contrib-k8s-helper
+npm install hypertegrity/node-red-contrib-k8s-helper
 ```
 
 ## Source code
