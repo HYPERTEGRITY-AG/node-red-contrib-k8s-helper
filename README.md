@@ -8,6 +8,7 @@ Node-RED tools for use in Containerized Environments
 ## Supported custom nodes
 
 -   [health-checks](docs/custom_nodes/health-checks.md)
+-   [watchdog](docs/custom_nodes/watchdog.md)
 
 ## Documentation
 

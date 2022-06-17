@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('health-checks',{
+    RED.nodes.registerType('health checks',{
         category: 'Kubernetes',
         color: '#C7E9C0',
         defaults: {
@@ -13,28 +13,135 @@
                     return (v === "" || (!isNaN(v) && v >= 1 && v <= 65535));
                 },
                 required:false
+            },
+            conditions: {
+                value:["Database tables created", "MQTT connected"],
+                required:true
+            },
+            foobar: {
+                value:""
+            },
+            foobar2: {
+                value:""
+            },
+            foobar3: {
+                value:""
+            },
+            foobar4: {
+                value:""
             }
+        },
+        oneditprepare: function () {
+            //create the tabs
+            var tabs = RED.tabs.create({
+                id: "func-tabs",
+                onchange: function(tab) {
+                    $("#func-tabs-content").children().hide();
+                    $("#" + tab.id).show();
+                }
+            });
+
+            //add the Conditions tab
+            tabs.addTab({
+                id: "func-tab-conditions",
+                iconClass: "fa fa-list",
+                label: "Conditions"
+            });
+
+            //add the Startup tab
+            tabs.addTab({
+                id: "func-tab-startup-probe",
+                iconClass: "fa fa-floppy-o",
+                label: "Startup-Probe"
+            });
+
+            //add the Readiness tab
+            tabs.addTab({
+                id: "func-tab-readiness-probe",
+                iconClass: "fa fa-check",
+                label: "Readiness-Probe"
+            });
+
+            //add the Liveness tab
+            tabs.addTab({
+                id: "func-tab-liveness-probe",
+                iconClass: "fa fa-heartbeat",
+                label: "Liveness-Probe"
+            });
+
+            //activate a tab programmatically by calling activateTab with a valid id
+            tabs.activateTab("func-tab-conditions");
         },
         inputs:0,
         outputs:0,
         icon: "hb.svg",
         label: function() {
-            return this.name||"health-checks";
+            return this.name||"health checks";
         }
     });
 </script>
 
-<script type="text/html" data-template-name="health-checks">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+<script type="text/html" data-template-name="health checks">
+    <style>
+        .func-tabs-row {
+            margin-bottom: 0;
+        }
+    </style>
+
+    <div class="form-row node-text-editor-row" style="position:relative">
+        <div class="form-row">
+            <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+            <input type="text" id="node-input-name" placeholder="Name">
+        </div>
+        <div class="form-row">
+            <label for="node-input-port"><i class="fa fa-hashtag"></i> Port</label>
+            <input type="text" id="node-input-port" placeholder="80">
+        </div>
     </div>
-    <div class="form-row">
-        <label for="node-input-port"><i class="fa fa-hashtag"></i> Port</label>
-        <input type="text" id="node-input-port">
+
+    <div class="form-row func-tabs-row">
+        <ul style="min-width: 600px; margin-bottom: 20px;" id="func-tabs"></ul>
+    </div>
+
+    <div id="func-tabs-content" style="min-height: calc(100% - 95px);">
+        <div id="func-tab-conditions" style="display:none">
+            <div class="form-row node-text-editor-row" style="position:relative">
+                <div class="form-row">
+                    <label for="node-input-foobar4"><i class="fa fa-tag"></i> Foo Bar4</label>
+                    <input type="text" id="node-input-foobar4" placeholder="Name">
+                </div>
+            </div>
+        </div>
+
+        <div id="func-tab-startup-probe" style="display:none">
+            <div class="form-row node-text-editor-row" style="position:relative">
+                <div class="form-row">
+                    <label for="node-input-foobar"><i class="fa fa-tag"></i> Foo Bar</label>
+                    <input type="text" id="node-input-foobar" placeholder="Name">
+                </div>
+            </div>
+        </div>
+
+        <div id="func-tab-readiness-probe" style="display:none">
+            <div class="form-row node-text-editor-row" style="position:relative">
+                <div class="form-row">
+                    <label for="node-input-foobar2"><i class="fa fa-tag"></i> Foo Bar</label>
+                    <input type="text" id="node-input-foobar2" placeholder="placeholder">
+                </div>
+            </div>
+        </div>
+
+        <div id="func-tab-liveness-probe" style="display:none">
+            <div class="form-row node-text-editor-row" style="position:relative">
+                <div class="form-row">
+                    <label for="node-input-foobar3"><i class="fa fa-tag"></i> Foo Bar</label>
+                    <input type="text" id="node-input-foobar3" placeholder="Name">
+                </div>
+            </div>
+        </div>
     </div>
 </script>
 
-<script type="text/html" data-help-name="health-checks">
-    <p>This node offers health checks for the flow(s) in a containerized environments.</p>
+<script type="text/html" data-help-name="health checks">
+    <p>This node offers health checks for the flow(s) in a containerized environment.</p>
 </script>
