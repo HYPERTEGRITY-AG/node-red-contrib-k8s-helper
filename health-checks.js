@@ -2,8 +2,9 @@ module.exports = function(RED) {
     const http = require('http');
 
     function HealthChecksNode(config) {
-        RED.nodes.createNode(this, config);
-        var node = this;
+        RED.nodes.createNode(this, config)
+        const node = this
+        node.name = config.name
 
         let healthCheckInstance = this.context().global.get("HealthCheckInstance");
         if (healthCheckInstance !== undefined) {
@@ -35,9 +36,11 @@ module.exports = function(RED) {
 
             // TODO: check conditions
 
-            res.writeHead(200);
+            res.writeHead(201);
             res.end('Everything\'s fine.\n');
         }
+
+        node.error(config);
 
         const server = http.createServer(requestListener);
 
