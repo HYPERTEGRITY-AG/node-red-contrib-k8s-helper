@@ -1,6 +1,6 @@
 {
   "name": "@hypertegrity/node-red-contrib-k8s-helper",
-  "version": "0.98.180",
+  "version": "0.98.450",
   "description": "Node-RED tools for use in Containerized Environments.",
   "repository": {
     "type": "git",

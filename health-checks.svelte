@@ -1,8 +1,10 @@
 <script context="module">
-  /* This is mostly identical to a standard Node-RED node. Important: It must be stated in script context="module"! */
   RED.nodes.registerType("health checks", {
 		category: "Kubernetes",
 		defaults: {
+			countInstances: {
+			    value: 0
+			},
 			name: {
 			    value: "",
 			    label: "Name",
@@ -19,6 +21,25 @@
                     return (v === "" || (!isNaN(v) && v >= 1 && v <= 65535));
                 },
                 required:false
+            },
+            sequence: {
+                value: 2
+            },
+            conditions: {
+                value: [ { name:"MQTT connected", id:"1", status:false }, { name:"DB tables created", id:"2", status:false } ]
+//                value: []
+            },
+            started: {
+                value: [ "2" ]
+//                value: []
+            },
+            ready: {
+                value: [ "1" ]
+//                value: []
+            },
+            alive: {
+                value: [ "1", "2" ]
+//                value: []
             }
 		},
 		inputs: 0,
@@ -30,10 +51,33 @@
                 return "health checks";
         },
 		oneditprepare: function () {
-			render(this)
+            let node = this;
+
+            node.countInstances = 0;
+
+            RED.nodes.eachNode(function(n) {
+                var nodeDef = RED.nodes.getType(n.type);
+                if (nodeDef) {
+                    if (n.type === 'health checks') {
+                        node.countInstances++;
+                    }
+                }
+            });
+
+			render(this, { minWidth: "650px" })
 		},
 		oneditsave: function () {
 			update(this)
+
+            RED.nodes.eachNode(function(n) {
+                var nodeDef = RED.nodes.getType(n.type);
+                if (nodeDef) {
+                    if (n.type === 'watchdog') {
+                        update(n);
+                        //alert("updated");
+                    }
+                }
+            });
 		},
 		oneditcancel: function () {
 			revert(this)
@@ -44,36 +88,137 @@
 <script>
     // get your node variable from extern and import the needed components from SIR
     export let node
-    import { Input, Button, TabbedPane, TabContent } from 'svelte-integration-red/components'
-    // then add your javascript functions
-    const myButtonFunc = () => alert('The button was pressed')
+    import { Input, Button, TabbedPane, TabContent, EditableList, Row } from 'svelte-integration-red/components'
 
+//    const myButtonFunc = () => alert('The button was pressed')
+
+    // Our tabs definitions
     let tabs = {
-        "conditions": "Conditions",     // icon: fa fa-list
-        "startup": "Startup-Probe",     // icon: fa fa-floppy-o
-        "readiness": "Readiness-Probe", // icon: fa fa-check
-        "liveness": "Liveness-Probe",   // icon: fa fa-heartbeat
+        "conditions": { name: "Conditions", icon: "list" },
+        "startup": { name: "Startup-Probe", icon: "floppy-o" },
+        "readiness": { name: "Readiness-Probe", icon: "check" },
+        "liveness": { name: "Liveness-Probe", icon: "heartbeat" }
+    }
+
+	function addCondition() {
+	    node.sequence = (node.sequence + 1)
+
+		node.conditions = [...node.conditions, { name:"New Condition", id:"" + (node.sequence), status:false } ]
+	}
+
+	function removeCondition(e) {
+	    changeIdStatus(node.started, e.id, false)
+ 	    changeIdStatus(node.ready, e.id, false)
+  	    changeIdStatus(node.alive, e.id, false)
+	}
+
+    function isIdContained(array, id) {
+        let ret = false
+
+        array.forEach((e) => {
+            if (e === id) {
+                ret = true
+            }
+        });
+
+        return ret
+    }
+
+    function changeIdStatus(array, id, status) {
+        if (status) {
+            // add 'id' to 'array'
+            array.push(id)
+        } else {
+            // Remove 'id' from 'array'
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] === id) {
+                    array.splice(i, 1);
+                }
+            }
+        }
     }
 </script>
 
-<!-- Now enter your svelte code -->
-<!-- just bind node and set the property name which you have stated above in the defaults variable -->
 <Input bind:node prop="name" />
 <Input bind:node prop="port" />
-<TabbedPane bind:tabs>
-    <TabContent tab="conditions" iconClass="tag">
-        <Button icon="plus" label="Click me" on:click={myButtonFunc}/>
-    </TabContent>
 
-    <TabContent tab="startup">
+{#if node.countInstances == 1}
+    <TabbedPane bind:tabs>
+        <TabContent tab="conditions" iconClass="tag">
+            <EditableList id:conditionsList
+                          bind:elements={node.conditions}
+                          let:element={condition}
+                          let:index
+                          removable
+                          addButton
+                          height=370
+                          disabled={node.disableInput}
+                          on:add={addCondition}
+                          on:remove={(e) => removeCondition(e.detail.removed)}>
+                <Input inline
+                       maximize
+                       value={condition.name}
+                       on:change={(e) => node.conditions[index].name = e.detail.value}>
+                </Input>
+    <!--            <Input inline maximize value={condition.id} disabled=true></Input> -->
+            </EditableList>
 
-    </TabContent>
+        </TabContent>
 
-    <TabContent tab="readiness">
+        <TabContent tab="startup">
+            {#if node.conditions.length > 0}
+                <EditableList bind:elements={node.conditions} let:element={condition} let:index>
+                    <div class:required={true} style="display:flex;">
+                        <div style="min-width: 99px;">
+                            <Input type="checkbox"
+                                   label={' ' + condition.name}
+                                   value={isIdContained(node.started, node.conditions[index].id)}
+                                   on:change={(e) => (changeIdStatus(node.started, node.conditions[index].id, e.detail.value))}/>
+                        </div>
+                    </div>
+                </EditableList>
+            {:else}
+                <div style="margin-top: 30px; font-weight: bold;">No Conditions found!</div>
+            {/if}
+        </TabContent>
 
-    </TabContent>
+        <TabContent tab="readiness">
+            {#if node.conditions.length > 0}
+                <EditableList bind:elements={node.conditions} let:element={condition} let:index>
+                    <div class:required={true} style="display:flex;">
+                        <div style="min-width: 99px;">
+                            <Input type="checkbox"
+                                   label={' ' + condition.name}
+                                   value={isIdContained(node.ready, node.conditions[index].id)}
+                                   on:change={(e) => (changeIdStatus(node.ready, node.conditions[index].id, e.detail.value))}/>
+                        </div>
+                    </div>
+                </EditableList>
+            {:else}
+                <div style="margin-top: 30px; font-weight: bold;">No Conditions found!</div>
+            {/if}
+        </TabContent>
 
-    <TabContent tab="liveness">
+        <TabContent tab="liveness">
+            {#if node.conditions.length > 0}
+                <EditableList bind:elements={node.conditions} let:element={condition} let:index>
+                    <div class:required={true} style="display:flex;">
+                        <div style="min-width: 99px;">
+                            <Input type="checkbox"
+                                   label={' ' + condition.name}
+                                   value={isIdContained(node.alive, node.conditions[index].id)}
+                                   on:change={(e) => (changeIdStatus(node.alive, node.conditions[index].id, e.detail.value))}/>
+                        </div>
+                    </div>
+                </EditableList>
+            {:else}
+                <div style="margin-top: 30px; font-weight: bold;">No Conditions found!</div>
+            {/if}
+        </TabContent>
+    </TabbedPane>
+{:else}
+  <div>More than one <strong>health checks</strong> node found!</div>
+{/if}
 
-    </TabContent>
-</TabbedPane>
+
+
