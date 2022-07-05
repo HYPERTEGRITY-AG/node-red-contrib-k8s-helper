@@ -88,7 +88,7 @@
 <script>
     // get your node variable from extern and import the needed components from SIR
     export let node
-    import { Input, Button, TabbedPane, TabContent, EditableList, Row } from 'svelte-integration-red/components'
+    import { Input, Button, TabbedPane, TabContent, EditableList, Row, Callout } from 'svelte-integration-red/components'
 
 //    const myButtonFunc = () => alert('The button was pressed')
 
@@ -124,7 +124,7 @@
         return ret
     }
 
-    function changeIdStatus(array, id, status) {
+    function changeIdStatus(array, id, status, summary) {
         if (status) {
             // add 'id' to 'array'
             array.push(id)
@@ -136,6 +136,22 @@
                 }
             }
         }
+
+        document.getElementById(summary).innerHTML = getSummary(array.length);
+    }
+
+    function getSummary(num) {
+        summary = "";
+
+        if (num == 0) {
+            summary = "This probe will ALWAYS succeed, since no condition is checked.";
+        } else if (num == node.conditions.length) {
+            summary = "This probe will succeed if ALL conditions are fulfilled.";
+        } else {
+            summary = "This probe will succeed if the checked condition(s) is/are fulfilled.";
+        }
+
+        return summary;
     }
 </script>
 
@@ -151,7 +167,7 @@
                           let:index
                           removable
                           addButton
-                          height=370
+                          height=470
                           disabled={node.disableInput}
                           on:add={addCondition}
                           on:remove={(e) => removeCondition(e.detail.removed)}>
@@ -167,16 +183,27 @@
 
         <TabContent tab="startup">
             {#if node.conditions.length > 0}
-                <EditableList bind:elements={node.conditions} let:element={condition} let:index>
+                <EditableList id:startupList
+                              bind:elements={node.conditions}
+                              height=470
+                              disabled={node.disableInput}
+                              let:element={condition}
+                              let:index>
                     <div class:required={true} style="display:flex;">
                         <div style="min-width: 99px;">
                             <Input type="checkbox"
                                    label={' ' + condition.name}
                                    value={isIdContained(node.started, node.conditions[index].id)}
-                                   on:change={(e) => (changeIdStatus(node.started, node.conditions[index].id, e.detail.value))}/>
+                                   on:change={(e) => (changeIdStatus(node.started,
+                                                                     node.conditions[index].id,
+                                                                     e.detail.value,
+                                                                     "startupSummary"))}/>
                         </div>
                     </div>
                 </EditableList>
+                <Callout type="success">
+                    <div id="startupSummary">{getSummary(node.started.length)}</div>
+                </Callout>
             {:else}
                 <div style="margin-top: 30px; font-weight: bold;">No Conditions found!</div>
             {/if}
@@ -184,16 +211,27 @@
 
         <TabContent tab="readiness">
             {#if node.conditions.length > 0}
-                <EditableList bind:elements={node.conditions} let:element={condition} let:index>
+                <EditableList id:readinessList
+                              bind:elements={node.conditions}
+                              height=470
+                              disabled={node.disableInput}
+                              let:element={condition}
+                              let:index>
                     <div class:required={true} style="display:flex;">
                         <div style="min-width: 99px;">
                             <Input type="checkbox"
                                    label={' ' + condition.name}
                                    value={isIdContained(node.ready, node.conditions[index].id)}
-                                   on:change={(e) => (changeIdStatus(node.ready, node.conditions[index].id, e.detail.value))}/>
+                                   on:change={(e) => (changeIdStatus(node.ready,
+                                                                     node.conditions[index].id,
+                                                                     e.detail.value,
+                                                                     "readinessSummary"))}/>
                         </div>
                     </div>
                 </EditableList>
+                <Callout type="success">
+                    <div id="readinessSummary">{getSummary(node.ready.length)}</div>
+                </Callout>
             {:else}
                 <div style="margin-top: 30px; font-weight: bold;">No Conditions found!</div>
             {/if}
@@ -201,23 +239,37 @@
 
         <TabContent tab="liveness">
             {#if node.conditions.length > 0}
-                <EditableList bind:elements={node.conditions} let:element={condition} let:index>
+                <EditableList id:livenessList
+                              bind:elements={node.conditions}
+                              height=470
+                              disabled={node.disableInput}
+                              let:element={condition}
+                              let:index>
                     <div class:required={true} style="display:flex;">
                         <div style="min-width: 99px;">
                             <Input type="checkbox"
                                    label={' ' + condition.name}
                                    value={isIdContained(node.alive, node.conditions[index].id)}
-                                   on:change={(e) => (changeIdStatus(node.alive, node.conditions[index].id, e.detail.value))}/>
+                                   on:change={(e) => (changeIdStatus(node.alive,
+                                                                     node.conditions[index].id,
+                                                                     e.detail.value,
+                                                                     "livenessSummary"))}/>
                         </div>
                     </div>
                 </EditableList>
+                <Callout type="success">
+                    <div id="livenessSummary">{getSummary(node.alive.length)}</div>
+                </Callout>
             {:else}
                 <div style="margin-top: 30px; font-weight: bold;">No Conditions found!</div>
             {/if}
         </TabContent>
     </TabbedPane>
 {:else}
-  <div>More than one <strong>health checks</strong> node found!</div>
+    <Callout type="error">
+        <span slot="header">More than one health checks node found!</span>
+        In sum, {node.countInstances} instances of health checks nodes are found within all flows and subflows.<br>Please reduce the number of health checks nodes to exactly one!
+    </Callout>
 {/if}
 
 

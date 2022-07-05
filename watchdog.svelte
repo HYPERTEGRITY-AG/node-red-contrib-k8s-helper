@@ -145,9 +145,12 @@
 
             node.contentTypeOpts = [];
             node.contentTypeOpts.push(makeTypedInputOpt("Please Select a Condition!", ""));
-            theHealthCheck.conditions.forEach(function(c) {
-                node.contentTypeOpts.push(makeTypedInputOpt(c.name, c.id));
-            });
+
+            if (theHealthCheck != null) {
+                theHealthCheck.conditions.forEach(function(c) {
+                    node.contentTypeOpts.push(makeTypedInputOpt(c.name, c.id));
+                });
+            }
 
 			render(this)
 		},
@@ -165,7 +168,7 @@
 <script>
     // get your node variable from extern and import the needed components from SIR
     export let node
-    import { Input, Select } from 'svelte-integration-red/components'
+    import { Input, Select, Callout } from 'svelte-integration-red/components'
 
 //    const myButtonFunc = () => alert('The button was pressed')
 
@@ -185,8 +188,14 @@
     </Select>
 {:else}
     {#if node.countInstances == 0}
-        <div>No <strong>health checks</strong> node found at all!</div>
+        <Callout type="error">
+            <span slot="header">No health checks node found!</span>
+            Please add a health checks node to the current flow(s)!
+        </Callout>
     {:else}
-        <div>More than one <strong>health checks</strong> node found!</div>
+        <Callout type="error">
+            <span slot="header">More than one health checks node found!</span>
+            In sum, {node.countInstances} instances of health checks nodes are found within all flows and subflows.<br>Please reduce the number of health checks nodes to exactly one!
+        </Callout>
     {/if}
 {/if}
