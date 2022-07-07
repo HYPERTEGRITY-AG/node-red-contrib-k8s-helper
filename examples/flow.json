@@ -1,8 +1,183 @@
 [
   {
+    "id": "f2506ff13e75337c",
+    "type": "group",
+    "z": "051ab42f1e6a2684",
+    "name": "MQTT Subscription (Not Configured yet!)",
+    "style": {
+      "stroke": "#000000",
+      "label": true,
+      "color": "#000000"
+    },
+    "nodes": [
+      "5103db9724e274f8"
+    ],
+    "x": 54,
+    "y": 39,
+    "w": 262,
+    "h": 82
+  },
+  {
+    "id": "5103db9724e274f8",
+    "type": "mqtt in",
+    "z": "051ab42f1e6a2684",
+    "g": "f2506ff13e75337c",
+    "name": "",
+    "topic": "#",
+    "qos": "2",
+    "datatype": "auto",
+    "broker": "",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 130,
+    "y": 80,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "a622cff4568e551d",
+    "type": "group",
+    "z": "051ab42f1e6a2684",
+    "name": "MQTT Watchdog",
+    "style": {
+      "stroke": "#000000",
+      "fill": "#ffffbf",
+      "label": true,
+      "color": "#000000"
+    },
+    "nodes": [
+      "3872f9a1def2cec5",
+      "a8d2519ba11cf1ea",
+      "fd236ff27b346c3a",
+      "67dd46966289ce94"
+    ],
+    "x": 54,
+    "y": 159,
+    "w": 732,
+    "h": 122
+  },
+  {
+    "id": "3872f9a1def2cec5",
+    "type": "watchdog",
+    "z": "051ab42f1e6a2684",
+    "g": "a622cff4568e551d",
+    "contentTypeOpts": [
+      {
+        "v": "",
+        "l": "Please Select a Condition!"
+      },
+      {
+        "v": "3",
+        "l": "MQTT connected"
+      }
+    ],
+    "countInstances": 1,
+    "name": "",
+    "condition": "3",
+    "fulfilled": "true",
+    "x": 570,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "a8d2519ba11cf1ea",
+    "type": "switch",
+    "z": "051ab42f1e6a2684",
+    "g": "a622cff4568e551d",
+    "name": "",
+    "property": "status.fill",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "green",
+        "vt": "str"
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "false",
+    "repair": false,
+    "outputs": 2,
+    "x": 290,
+    "y": 220,
+    "wires": [
+      [
+        "3872f9a1def2cec5"
+      ],
+      [
+        "fd236ff27b346c3a"
+      ]
+    ]
+  },
+  {
+    "id": "fd236ff27b346c3a",
+    "type": "watchdog",
+    "z": "051ab42f1e6a2684",
+    "g": "a622cff4568e551d",
+    "contentTypeOpts": [
+      {
+        "v": "",
+        "l": "Please Select a Condition!"
+      },
+      {
+        "v": "3",
+        "l": "MQTT connected"
+      }
+    ],
+    "countInstances": 1,
+    "name": "",
+    "condition": "3",
+    "fulfilled": "false",
+    "x": 590,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "67dd46966289ce94",
+    "type": "status",
+    "z": "051ab42f1e6a2684",
+    "g": "a622cff4568e551d",
+    "name": "",
+    "scope": [
+      "5103db9724e274f8"
+    ],
+    "x": 140,
+    "y": 220,
+    "wires": [
+      [
+        "a8d2519ba11cf1ea"
+      ]
+    ]
+  },
+  {
+    "id": "bb0fe93ebc6cdaed",
+    "type": "group",
+    "z": "051ab42f1e6a2684",
+    "name": "Health Checks",
+    "style": {
+      "stroke": "#000000",
+      "fill": "#e3f3d3",
+      "label": true,
+      "color": "#000000"
+    },
+    "nodes": [
+      "46775bc61489f216"
+    ],
+    "x": 54,
+    "y": 319,
+    "w": 192,
+    "h": 82
+  },
+  {
     "id": "46775bc61489f216",
     "type": "health checks",
-    "z": "eeb2cc4209330056",
+    "z": "051ab42f1e6a2684",
+    "g": "bb0fe93ebc6cdaed",
     "countInstances": 1,
     "name": "",
     "port": "",
@@ -23,97 +198,8 @@
     "alive": [
       "3"
     ],
-    "x": 590,
-    "y": 460,
-    "wires": []
-  },
-  {
-    "id": "3872f9a1def2cec5",
-    "type": "watchdog",
-    "z": "eeb2cc4209330056",
-    "contentTypeOpts": [
-      {
-        "v": "",
-        "l": "Please Select a Condition!"
-      },
-      {
-        "v": "3",
-        "l": "MQTT connected"
-      }
-    ],
-    "countInstances": 1,
-    "name": "",
-    "condition": "3",
-    "fulfilled": "true",
-    "x": 770,
+    "x": 150,
     "y": 360,
     "wires": []
-  },
-  {
-    "id": "a8d2519ba11cf1ea",
-    "type": "switch",
-    "z": "eeb2cc4209330056",
-    "name": "",
-    "property": "status.fill",
-    "propertyType": "msg",
-    "rules": [
-      {
-        "t": "eq",
-        "v": "green",
-        "vt": "str"
-      },
-      {
-        "t": "else"
-      }
-    ],
-    "checkall": "false",
-    "repair": false,
-    "outputs": 2,
-    "x": 490,
-    "y": 380,
-    "wires": [
-      [
-        "3872f9a1def2cec5"
-      ],
-      [
-        "fd236ff27b346c3a"
-      ]
-    ]
-  },
-  {
-    "id": "fd236ff27b346c3a",
-    "type": "watchdog",
-    "z": "eeb2cc4209330056",
-    "contentTypeOpts": [
-      {
-        "v": "",
-        "l": "Please Select a Condition!"
-      },
-      {
-        "v": "3",
-        "l": "MQTT connected"
-      }
-    ],
-    "countInstances": 1,
-    "name": "",
-    "condition": "3",
-    "fulfilled": "false",
-    "x": 790,
-    "y": 400,
-    "wires": []
-  },
-  {
-    "id": "67dd46966289ce94",
-    "type": "status",
-    "z": "eeb2cc4209330056",
-    "name": "",
-    "scope": [],
-    "x": 340,
-    "y": 380,
-    "wires": [
-      [
-        "a8d2519ba11cf1ea"
-      ]
-    ]
   }
 ]
