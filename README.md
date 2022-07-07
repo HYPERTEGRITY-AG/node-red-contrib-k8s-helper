@@ -14,8 +14,8 @@
 
 ## Supported custom nodes
 
--   [health-checks](docs/custom_nodes/health-checks.md)
--   [watchdog](docs/custom_nodes/watchdog.md)
+-   [health-checks](https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/blob/main/docs/custom_nodes/health-checks.md)
+-   [watchdog](https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/blob/main/docs/custom_nodes/watchdog.md)
 
 ## Prerequisites
 
