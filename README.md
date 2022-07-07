@@ -1,14 +1,14 @@
 <br />
 <p align="center">
-<h3 align="center">HYPERTEGRITY's Node-RED Kubernetes Helper</h3>
-  <p align="center">
-    Node-RED tools for use in containerized environments.
-    <br />
-    <br />
-    <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues">Request Feature</a>
-  </p>
+    <h3 align="center">HYPERTEGRITY's Node-RED Kubernetes Helper</h3>
+    <p align="center">
+        Node-RED tools for use in containerized environments.
+        <br />
+        <br />
+        <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues">Report Bug</a>
+        ·
+        <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues">Request Feature</a>
+    </p>
 </p>
 
 
@@ -36,7 +36,7 @@ sudo npm install -g --unsafe-perm node-red
 Run the following command on a command-line interface.
 
 ```sh
-npm install node-red-contrib-k8s-helper
+npm install @hypertegrity/node-red-contrib-k8s-helper
 ```
 
 ## Source code

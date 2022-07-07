@@ -26,20 +26,20 @@
                 value: 2
             },
             conditions: {
-                value: [ { name:"MQTT connected", id:"1", status:false }, { name:"DB tables created", id:"2", status:false } ]
-//                value: []
+//                value: [ { name:"MQTT connected", id:"1", status:false }, { name:"DB tables created", id:"2", status:false } ]
+                value: []
             },
             started: {
-                value: [ "2" ]
-//                value: []
+//                value: [ "2" ]
+                value: []
             },
             ready: {
-                value: [ "1" ]
-//                value: []
+//                value: [ "1" ]
+                value: []
             },
             alive: {
-                value: [ "1", "2" ]
-//                value: []
+//                value: [ "1", "2" ]
+                value: []
             }
 		},
 		inputs: 0,

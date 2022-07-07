@@ -1,6 +1,6 @@
 {
   "name": "@hypertegrity/node-red-contrib-k8s-helper",
-  "version": "0.99.2-beta",
+  "version": "0.99.4-beta",
   "description": "Node-RED tools for use in a containerized environment.",
   "repository": {
     "type": "git",
@@ -11,12 +11,16 @@
     "kubernetes",
     "k8s",
     "container",
+    "docker",
     "cloud",
     "iot",
     "aws",
     "amazon",
     "azure",
     "google-cloud",
+    "observation",
+    "security",
+    "health-check",
     "hypertegrity"
   ],
   "author": "Will Freitag",
@@ -33,5 +37,8 @@
   "homepage": "https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper#readme",
   "dependencies": {
     "svelte-integration-red": "^1.3.0"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

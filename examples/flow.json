@@ -1,0 +1,119 @@
+[
+  {
+    "id": "46775bc61489f216",
+    "type": "health checks",
+    "z": "eeb2cc4209330056",
+    "countInstances": 1,
+    "name": "",
+    "port": "",
+    "sequence": 4,
+    "conditions": [
+      {
+        "name": "MQTT connected",
+        "id": "3",
+        "status": false
+      }
+    ],
+    "started": [
+      "3"
+    ],
+    "ready": [
+      "3"
+    ],
+    "alive": [
+      "3"
+    ],
+    "x": 590,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "3872f9a1def2cec5",
+    "type": "watchdog",
+    "z": "eeb2cc4209330056",
+    "contentTypeOpts": [
+      {
+        "v": "",
+        "l": "Please Select a Condition!"
+      },
+      {
+        "v": "3",
+        "l": "MQTT connected"
+      }
+    ],
+    "countInstances": 1,
+    "name": "",
+    "condition": "3",
+    "fulfilled": "true",
+    "x": 770,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "a8d2519ba11cf1ea",
+    "type": "switch",
+    "z": "eeb2cc4209330056",
+    "name": "",
+    "property": "status.fill",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "green",
+        "vt": "str"
+      },
+      {
+        "t": "else"
+      }
+    ],
+    "checkall": "false",
+    "repair": false,
+    "outputs": 2,
+    "x": 490,
+    "y": 380,
+    "wires": [
+      [
+        "3872f9a1def2cec5"
+      ],
+      [
+        "fd236ff27b346c3a"
+      ]
+    ]
+  },
+  {
+    "id": "fd236ff27b346c3a",
+    "type": "watchdog",
+    "z": "eeb2cc4209330056",
+    "contentTypeOpts": [
+      {
+        "v": "",
+        "l": "Please Select a Condition!"
+      },
+      {
+        "v": "3",
+        "l": "MQTT connected"
+      }
+    ],
+    "countInstances": 1,
+    "name": "",
+    "condition": "3",
+    "fulfilled": "false",
+    "x": 790,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "67dd46966289ce94",
+    "type": "status",
+    "z": "eeb2cc4209330056",
+    "name": "",
+    "scope": [],
+    "x": 340,
+    "y": 380,
+    "wires": [
+      [
+        "a8d2519ba11cf1ea"
+      ]
+    ]
+  }
+]
