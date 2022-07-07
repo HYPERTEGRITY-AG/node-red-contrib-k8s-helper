@@ -1,9 +1,23 @@
-# node-red-contrib-k8s-helper
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-Node-RED tools for use in Containerized Environments
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+<h3 align="center">HYPERTEGRITY's Node-RED Kubernetes Helper</h3>
+  <p align="center">
+    Node-RED tools for use in containerized environments.
+    <br />
+    <br />
+    <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues">Request Feature</a>
+  </p>
+</p>
 
-| :books: [Documentation](docs/documentation.md) | :dart: [Roadmap](./ROADMAP.md) |
-|-------------------------------------------------------|--------------------------------|
 
 ## Supported custom nodes
 

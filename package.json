@@ -1,14 +1,23 @@
 {
   "name": "@hypertegrity/node-red-contrib-k8s-helper",
-  "version": "0.98.482",
-  "description": "Node-RED tools for use in Containerized Environments.",
+  "version": "0.99.0-beta",
+  "description": "Node-RED tools for use in a containerized environment.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper.git"
   },
   "keywords": [
     "node-red",
-    "kubernetes"
+    "kubernetes",
+    "k8s",
+    "container",
+    "cloud",
+    "iot",
+    "aws",
+    "amazon",
+    "azure",
+    "google-cloud",
+    "hypertegrity"
   ],
   "author": "Will Freitag",
   "license": "MIT",
