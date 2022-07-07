@@ -1,6 +1,6 @@
 {
   "name": "@hypertegrity/node-red-contrib-k8s-helper",
-  "version": "0.99.4-beta",
+  "version": "0.99.5-beta",
   "description": "Node-RED tools for use in a containerized environment.",
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "author": "Will Freitag",
   "license": "MIT",
   "node-red": {
+    "version": ">=2.0.0",
     "nodes": {
       "health checks": "health-checks.js",
       "watchdog": "watchdog.js"
@@ -39,6 +40,6 @@
     "svelte-integration-red": "^1.3.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=12.0.0"
   }
 }
