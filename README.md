@@ -1,10 +1,3 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
-<!-- PROJECT LOGO -->
 <br />
 <p align="center">
 <h3 align="center">HYPERTEGRITY's Node-RED Kubernetes Helper</h3>
@@ -24,15 +17,25 @@
 -   [health-checks](docs/custom_nodes/health-checks.md)
 -   [watchdog](docs/custom_nodes/watchdog.md)
 
-## Documentation
+## Prerequisites
 
--   [Documentation](docs/documentation.md)
+- npm
 
-## How to install
+```sh
+sudo npm install npm@latest -g
+```
+
+- node-red
+
+```sh
+sudo npm install -g --unsafe-perm node-red
+```
+
+## Installation
 
 Run the following command on a command-line interface.
 
-```
+```sh
 npm install node-red-contrib-k8s-helper
 ```
 
@@ -40,7 +43,14 @@ npm install node-red-contrib-k8s-helper
 
 -   [https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper](https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper)
 
+## Roadmap
+
+See the [open issues](https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues) for a list of proposed features (and known issues).
+
 ## Related links
+
+- Documentation on Kubernetes Health Checks: [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes)
+
 
 ## Copyright and License
 
