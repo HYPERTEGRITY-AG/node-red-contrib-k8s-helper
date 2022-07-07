@@ -2,7 +2,7 @@
   {
     "id": "f2506ff13e75337c",
     "type": "group",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "name": "MQTT Subscription (Not Configured yet!)",
     "style": {
       "stroke": "#000000",
@@ -12,15 +12,15 @@
     "nodes": [
       "5103db9724e274f8"
     ],
-    "x": 54,
-    "y": 39,
+    "x": 94,
+    "y": 99,
     "w": 262,
     "h": 82
   },
   {
     "id": "5103db9724e274f8",
     "type": "mqtt in",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "g": "f2506ff13e75337c",
     "name": "",
     "topic": "#",
@@ -31,8 +31,8 @@
     "rap": true,
     "rh": 0,
     "inputs": 0,
-    "x": 130,
-    "y": 80,
+    "x": 170,
+    "y": 140,
     "wires": [
       []
     ]
@@ -40,7 +40,7 @@
   {
     "id": "a622cff4568e551d",
     "type": "group",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "name": "MQTT Watchdog",
     "style": {
       "stroke": "#000000",
@@ -54,15 +54,15 @@
       "fd236ff27b346c3a",
       "67dd46966289ce94"
     ],
-    "x": 54,
-    "y": 159,
-    "w": 732,
+    "x": 94,
+    "y": 219,
+    "w": 692,
     "h": 122
   },
   {
     "id": "3872f9a1def2cec5",
     "type": "watchdog",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "g": "a622cff4568e551d",
     "contentTypeOpts": [
       {
@@ -79,13 +79,13 @@
     "condition": "3",
     "fulfilled": "true",
     "x": 570,
-    "y": 200,
+    "y": 260,
     "wires": []
   },
   {
     "id": "a8d2519ba11cf1ea",
     "type": "switch",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "g": "a622cff4568e551d",
     "name": "",
     "property": "status.fill",
@@ -103,8 +103,8 @@
     "checkall": "false",
     "repair": false,
     "outputs": 2,
-    "x": 290,
-    "y": 220,
+    "x": 330,
+    "y": 280,
     "wires": [
       [
         "3872f9a1def2cec5"
@@ -117,7 +117,7 @@
   {
     "id": "fd236ff27b346c3a",
     "type": "watchdog",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "g": "a622cff4568e551d",
     "contentTypeOpts": [
       {
@@ -134,20 +134,20 @@
     "condition": "3",
     "fulfilled": "false",
     "x": 590,
-    "y": 240,
+    "y": 300,
     "wires": []
   },
   {
     "id": "67dd46966289ce94",
     "type": "status",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "g": "a622cff4568e551d",
     "name": "",
     "scope": [
       "5103db9724e274f8"
     ],
-    "x": 140,
-    "y": 220,
+    "x": 180,
+    "y": 280,
     "wires": [
       [
         "a8d2519ba11cf1ea"
@@ -157,7 +157,7 @@
   {
     "id": "bb0fe93ebc6cdaed",
     "type": "group",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "name": "Health Checks",
     "style": {
       "stroke": "#000000",
@@ -168,15 +168,15 @@
     "nodes": [
       "46775bc61489f216"
     ],
-    "x": 54,
-    "y": 319,
+    "x": 94,
+    "y": 379,
     "w": 192,
     "h": 82
   },
   {
     "id": "46775bc61489f216",
     "type": "health checks",
-    "z": "051ab42f1e6a2684",
+    "z": "314c6683044f5036",
     "g": "bb0fe93ebc6cdaed",
     "countInstances": 1,
     "name": "",
@@ -198,8 +198,8 @@
     "alive": [
       "3"
     ],
-    "x": 150,
-    "y": 360,
+    "x": 190,
+    "y": 420,
     "wires": []
   }
 ]
