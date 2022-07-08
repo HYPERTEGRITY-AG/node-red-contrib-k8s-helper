@@ -15,8 +15,8 @@
 			    placeholder: "Name"
 			},
             condition: {
-                value:"1",
-//                value:"",
+//                value:"1",
+                value:"",
                 required:true
             },
             fulfilled: {
@@ -26,7 +26,7 @@
         },
 		inputs: 1,
 		outputs: 0,
-		color: "#FDF0C2",
+		color: "#fadb6b",
         icon: function() {
             return (this.fulfilled === "true") ? "checked.png" : "unchecked.png";
         },
@@ -166,12 +166,8 @@
 </script>
 
 <script>
-    // get your node variable from extern and import the needed components from SIR
     export let node
     import { Input, Select, Callout } from 'svelte-integration-red/components'
-
-//    const myButtonFunc = () => alert('The button was pressed')
-
 </script>
 
 <Input bind:node prop="name" />

@@ -44,8 +44,8 @@
 		},
 		inputs: 0,
 		outputs: 0,
-		color: "#C7E9C0",
-		icon: "hb.svg",
+		color: "#9ad78e",
+		icon: "hb.png",
         label: function() {
           if (this.name) return this.name;
                 return "health checks";
