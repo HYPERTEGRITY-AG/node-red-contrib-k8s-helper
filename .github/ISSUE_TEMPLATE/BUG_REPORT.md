@@ -16,6 +16,8 @@ Found a bug? Please fill out the sections below. 👍
 A summary of the issue.
 -->
 
+(Write your answer here.)
+
 ### Steps to Reproduce
 
 1. (for example) Create a new flow
@@ -27,6 +29,8 @@ A summary of the issue.
 <!--
 Any other relevant information. For example, why do you consider this a bug and what did you expect to happen instead?
 -->
+
+(Write your answer here.)
 
 ### Technical details
 
