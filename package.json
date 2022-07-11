@@ -1,6 +1,6 @@
 {
   "name": "@hypertegrity/node-red-contrib-k8s-helper",
-  "version": "0.99.17-beta",
+  "version": "0.99.28-beta",
   "description": "Node-RED tools for use in a containerized environment.",
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper#readme",
   "dependencies": {
+    "node-red-dev": "^0.1.5",
     "svelte-integration-red": "^1.3.0"
   },
   "engines": {

@@ -9,15 +9,17 @@
 </style>
 
 <p>This node offers health checks for flow(s) running in a containerized environment.</p>
-When added to a flow, this node will start an HTTP server, listening on a defined port (default: 80) and providing three paths: <code>/started</code>, <code>/ready</code> and <code>/alive</code>.<br>
+When added to a flow, this node will start an HTTP server, listening on a defined port (default: 80) providing three paths: <code>/started</code>, <code>/ready</code> and <code>/alive</code>.<br>
+It let's you define <strong>conditions</strong> that must be fulfilled in order to let one or more probes succeed.<br>
 <br><div class="infoBoxS">Please note that only one health checks node can be defined within ALL flows and subflows!</div><br>
 <h3>Integration</h3>
 This node offers three paths: <code>/started</code>, <code>/ready</code> and <code>/alive</code> at a configured port.<br>
 These paths can be used as HTTP probes in a containerized environment.<br>
-Each of the paths will check for one or more of the defined <strong>conditions</strong> and return a <code>200 OK</code> or <code>500 Internal Error</code> if at least one of the conditions failed. Additionally, the body will list the condition(s) that failed.
+Each of the paths will check for one or more of the defined <strong>conditions</strong> and return a <code>200 OK</code> or <code>500 Internal Error</code> if at least one of the conditions is not fulfilled. Additionally, the body will list the condition(s) that failed.
 <p>Read more about kubernetes Probes <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes">here</a>.</p>
 <h3>Example</h3>
 Let's think about a flow, subscribing to an MQTT message broker (using an <strong>mqtt in node</strong>).<br>
 A <strong>health checks node</strong> will then define a condition, named for example  'MQTT connected' and add this condition to all 3 probes.<br>
-A watchdog will check for the <strong>mqtt in node's</strong> status (one of 'connected', 'connecting' and 'disconnected') and its color ("green" if connected) in particular. On a status change, the health checks node's condition will be set accordingly using a <strong>switch node</strong>.<br>
-The container framework will frequently call the container's HTTP probes and decide what to do, if a check fails.
+A watchdog will check for the <strong>mqtt in node's</strong> status (one of 'connected', 'connecting' or 'disconnected') and its color ("green" if connected) in particular. On a status change (triggered by a <strong>status node</strong>), the health checks node's condition will be set accordingly using a <strong>switch node</strong>: Condition fulfilled if the color is "green", not fulfilled otherwise.<br>
+Eventually, the container framework will frequently call the container's HTTP probes and decide what to do, if a check fails.<br>
+An appropriate example flow can be found in the Editor (via <strong>Menu->Import->Examples->@hypertegrity/node-red-contrib-k8s-helper</strong>).

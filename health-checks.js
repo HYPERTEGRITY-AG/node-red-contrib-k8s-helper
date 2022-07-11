@@ -46,7 +46,7 @@ module.exports = function(RED) {
         node.name = config.name
         const globalContext = node.context().global;
 
-        // first of make a global copy of all conditions
+        // first of all: make a global copy of all conditions
         globalContext.set("HEALTH_CHECKS_CONDITIONS", config.conditions);
 
         let healthCheckInstance = globalContext.get("HealthCheckInstance");

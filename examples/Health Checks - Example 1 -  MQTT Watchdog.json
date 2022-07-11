@@ -1,26 +1,50 @@
 [
   {
-    "id": "f2506ff13e75337c",
+    "id": "3365c430042a187e",
     "type": "group",
-    "z": "314c6683044f5036",
-    "name": "MQTT Subscription (Not Configured yet!)",
+    "z": "81938f8d6e112027",
+    "name": "Health Checks - Example #1: MQTT Watchdog",
     "style": {
       "stroke": "#000000",
+      "fill": "#ffbfbf",
       "label": true,
       "color": "#000000"
     },
     "nodes": [
+      "f2506ff13e75337c",
+      "a622cff4568e551d",
+      "bb0fe93ebc6cdaed"
+    ],
+    "x": 188,
+    "y": 173,
+    "w": 744,
+    "h": 454,
+    "info": "# Health Checks - Example #1: MQTT Watchdog\nThis simple flow demonstrates, how conditions defined within a **health check node** are set/unset by a **watchdog node**.\n## Getting Started\n 1. The **mqtt in node** has to be configured to your needs.  \n After deploying the flow you should see the **mqtt in node** showing a green dot stating it's connected. \n 2. Open the **health checks node** in the editor and see a condition (`MQTT connected`) is already defined and assigned to all probes (`Startup`, `Readiness` and `Liveness`).\n 3. Open the **watchdog nodes** and ensure, the proper condition (`MQTT connected`) is set and unset respectively.  \n 4. Ensure, the healthchecks paths (`started`, `ready` and `alive`) can be opened after the flow is deployed.  \n Example:\n ```\n curl -v localhost/started\n ```\n or if you have configured a special port:\n ```\n curl -v localhost:8080/ready\n ```\n You might want to set the health checks as a resource in your containerized environment. For more information on this, please refere to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes). \n\n## How the Example works\n * The **status node** will be triggered on any connection status change of the **mqtt in node**.\n * The **switch node** checks, if the status' color is `green` and if so, triggers the first **watchdog node** setting the condition (`MQTT connected`) to `fulfilled` or triggers the second **watchdog node** setting the condition to `NOT fulfilled` if the color is NOT green."
+  },
+  {
+    "id": "f2506ff13e75337c",
+    "type": "group",
+    "z": "81938f8d6e112027",
+    "g": "3365c430042a187e",
+    "name": "MQTT Subscription (Not Configured yet!)",
+    "style": {
+      "stroke": "#000000",
+      "label": true,
+      "color": "#000000",
+      "fill": "#ffffff"
+    },
+    "nodes": [
       "5103db9724e274f8"
     ],
-    "x": 94,
-    "y": 99,
+    "x": 214,
+    "y": 199,
     "w": 262,
     "h": 82
   },
   {
     "id": "5103db9724e274f8",
     "type": "mqtt in",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
     "g": "f2506ff13e75337c",
     "name": "",
     "topic": "#",
@@ -31,8 +55,8 @@
     "rap": true,
     "rh": 0,
     "inputs": 0,
-    "x": 170,
-    "y": 140,
+    "x": 290,
+    "y": 240,
     "wires": [
       []
     ]
@@ -40,7 +64,8 @@
   {
     "id": "a622cff4568e551d",
     "type": "group",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
+    "g": "3365c430042a187e",
     "name": "MQTT Watchdog",
     "style": {
       "stroke": "#000000",
@@ -54,15 +79,15 @@
       "fd236ff27b346c3a",
       "67dd46966289ce94"
     ],
-    "x": 94,
-    "y": 219,
+    "x": 214,
+    "y": 479,
     "w": 692,
     "h": 122
   },
   {
     "id": "3872f9a1def2cec5",
     "type": "watchdog",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
     "g": "a622cff4568e551d",
     "contentTypeOpts": [
       {
@@ -78,14 +103,14 @@
     "name": "",
     "condition": "3",
     "fulfilled": "true",
-    "x": 570,
-    "y": 260,
+    "x": 690,
+    "y": 520,
     "wires": []
   },
   {
     "id": "a8d2519ba11cf1ea",
     "type": "switch",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
     "g": "a622cff4568e551d",
     "name": "",
     "property": "status.fill",
@@ -103,8 +128,8 @@
     "checkall": "false",
     "repair": false,
     "outputs": 2,
-    "x": 330,
-    "y": 280,
+    "x": 450,
+    "y": 540,
     "wires": [
       [
         "3872f9a1def2cec5"
@@ -117,7 +142,7 @@
   {
     "id": "fd236ff27b346c3a",
     "type": "watchdog",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
     "g": "a622cff4568e551d",
     "contentTypeOpts": [
       {
@@ -133,21 +158,21 @@
     "name": "",
     "condition": "3",
     "fulfilled": "false",
-    "x": 590,
-    "y": 300,
+    "x": 710,
+    "y": 560,
     "wires": []
   },
   {
     "id": "67dd46966289ce94",
     "type": "status",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
     "g": "a622cff4568e551d",
     "name": "",
     "scope": [
       "5103db9724e274f8"
     ],
-    "x": 180,
-    "y": 280,
+    "x": 300,
+    "y": 540,
     "wires": [
       [
         "a8d2519ba11cf1ea"
@@ -157,7 +182,8 @@
   {
     "id": "bb0fe93ebc6cdaed",
     "type": "group",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
+    "g": "3365c430042a187e",
     "name": "Health Checks",
     "style": {
       "stroke": "#000000",
@@ -168,15 +194,15 @@
     "nodes": [
       "46775bc61489f216"
     ],
-    "x": 94,
-    "y": 379,
+    "x": 214,
+    "y": 339,
     "w": 192,
     "h": 82
   },
   {
     "id": "46775bc61489f216",
     "type": "health checks",
-    "z": "314c6683044f5036",
+    "z": "81938f8d6e112027",
     "g": "bb0fe93ebc6cdaed",
     "countInstances": 1,
     "name": "",
@@ -198,8 +224,8 @@
     "alive": [
       "3"
     ],
-    "x": 190,
-    "y": 420,
+    "x": 310,
+    "y": 380,
     "wires": []
   }
 ]
