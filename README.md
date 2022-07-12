@@ -8,6 +8,10 @@
         <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues/new?assignees=&labels=type%3ABug%2Cstatus%3AUnconfirmed&template=BUG_REPORT.md&title=">Report Bug</a>
         ·
         <a href="https://github.com/HYPERTEGRITY-AG/node-red-contrib-k8s-helper/issues/new?assignees=&labels=type%3AEnhancement&template=FEATURE_REQUEST.md&title=">Request Feature</a>
+        ·
+        <a href="https://www.npmjs.com/package/@hypertegrity/node-red-contrib-k8s-helper">View on npm</a>
+        ·
+        <a href="https://flows.nodered.org/node/@hypertegrity/node-red-contrib-k8s-helper">View on Node-RED's Flow Library</a>
     </p>
 </p>
 
