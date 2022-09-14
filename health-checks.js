@@ -98,9 +98,7 @@ module.exports = function(RED) {
             }
         });
 
-        port = (config.port !== '') ? config.port : "80";
-
-        server.listen(port);
+        server.listen(config.port);
 
         if (!server.listening) {
             this.status({ fill:"red",

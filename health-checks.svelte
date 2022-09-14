@@ -15,12 +15,11 @@
                 value:"",
                 label: "Port",
                 icon: "hashtag",
-                placeholder: "80",
                 type:"number",
                 validate:function(v) {
                     return (v === "" || (!isNaN(v) && v >= 1 && v <= 65535));
                 },
-                required:false
+                required:true
             },
             sequence: {
                 value: 2
@@ -137,7 +136,7 @@
             }
         }
 
-        document.getElementById(summary).innerHTML = getSummary(array.length);
+
     }
 
     function getSummary(num) {
